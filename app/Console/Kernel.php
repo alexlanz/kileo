@@ -12,6 +12,7 @@ class Kernel extends ConsoleKernel {
 	 */
 	protected $commands = [
         'Kileo\Console\Commands\CreateTeacher',
+        'Kileo\Console\Commands\CreatePupil',
 		'Kileo\Console\Commands\Inspire',
 	];
 
