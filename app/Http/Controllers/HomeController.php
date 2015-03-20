@@ -1,27 +1,28 @@
 <?php namespace Kileo\Http\Controllers;
 
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Http\RedirectResponse;
+
 class HomeController extends Controller {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| This controller renders your application's "dashboard" for users that
-	| are authenticated. Of course, you are free to change or remove the
-	| controller as you wish. It is just here to get your app started!
-	|
-	*/
+    /**
+     * The Guard implementation.
+     *
+     * @var Guard
+     */
+    protected $auth;
 
-	/**
-	 * Create a new controller instance.
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-		$this->middleware('auth');
-	}
+    /**
+     * Create a new controller instance.
+     *
+     * @param Guard $auth
+     */
+    public function __construct(Guard $auth)
+    {
+        $this->auth = $auth;
+
+        $this->middleware('auth');
+    }
 
 	/**
 	 * Show the application dashboard to the user.
@@ -30,7 +31,18 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		return view('home');
+		$user = $this->auth->user();
+
+        switch ($user->type)
+        {
+            case 'teacher':
+                return new RedirectResponse(route('teacher.index'));
+            case 'pupil':
+                return new RedirectResponse(route('pupil.index'));
+            default:
+                $this->auth->logout();
+                return new RedirectResponse(route('login.show'));
+        }
 	}
 
 }

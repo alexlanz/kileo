@@ -27,6 +27,8 @@ class Kernel extends HttpKernel {
 		'auth' => 'Kileo\Http\Middleware\Authenticate',
 		'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
 		'guest' => 'Kileo\Http\Middleware\RedirectIfAuthenticated',
+        'teacher' => 'Kileo\Http\Middleware\Teacher',
+        'pupil' => 'Kileo\Http\Middleware\Pupil',
 	];
 
 }
