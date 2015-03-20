@@ -1,4 +1,4 @@
-<?php namespace App\Events;
+<?php namespace Kileo\Events;
 
 abstract class Event {
 

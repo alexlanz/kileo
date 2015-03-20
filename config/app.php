@@ -26,7 +26,7 @@ return [
 	|
 	*/
 
-	'url' => 'http://localhost',
+	'url' => 'http://kileo.dev',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -139,11 +139,11 @@ return [
 		/*
 		 * Application Service Providers...
 		 */
-		'App\Providers\AppServiceProvider',
-		'App\Providers\BusServiceProvider',
-		'App\Providers\ConfigServiceProvider',
-		'App\Providers\EventServiceProvider',
-		'App\Providers\RouteServiceProvider',
+		'Kileo\Providers\AppServiceProvider',
+		'Kileo\Providers\BusServiceProvider',
+		'Kileo\Providers\ConfigServiceProvider',
+		'Kileo\Providers\EventServiceProvider',
+		'Kileo\Providers\RouteServiceProvider',
 
 	],
 
