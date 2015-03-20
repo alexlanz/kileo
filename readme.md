@@ -28,3 +28,13 @@ Kileo
 1. Run `vagrant ssh` to log into the machine
 - Change to the directory /vagrant
 - Run `./vagrant/setup.sh` to setup the dependencies
+
+
+## Console
+
+### Creating teachers and pupils
+
+```bash
+php artisan kileo:create-teacher "Alex Lanz" "alex" "password"
+php artisan kileo:create-pupil "Marius Mössmer" "marius" "password"
+```
