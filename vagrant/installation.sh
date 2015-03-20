@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Locales
-echo 'LC_ALL="en_US.UTF-8"' | tee -a /etc/environment
+grep -q 'LC_ALL="en_US.UTF-8"' /etc/environment || echo 'LC_ALL="en_US.UTF-8"' >> /etc/environment
 
 # Hostname, Hosts
 cp /vagrant/vagrant/files/hostname /etc/hostname
@@ -46,10 +46,10 @@ sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini
 sed -i "s/memory_limit = .*/memory_limit = 512M/" /etc/php5/fpm/php.ini
 sed -i "s/;date.timezone.*/date.timezone = Europe\/Rome/" /etc/php5/fpm/php.ini
 
-echo "xdebug.remote_enable = 1" | tee -a /etc/php5/fpm/conf.d/20-xdebug.ini
-echo "xdebug.remote_connect_back = 1" | tee -a /etc/php5/fpm/conf.d/20-xdebug.ini
-echo "xdebug.remote_port = 9000" | tee -a /etc/php5/fpm/conf.d/20-xdebug.ini
-echo "xdebug.max_nesting_level = 200" | tee -a /etc/php5/fpm/conf.d/20-xdebug.ini
+grep -q 'xdebug.remote_enable = 1' /etc/php5/fpm/conf.d/20-xdebug.ini || echo 'xdebug.remote_enable = 1' >> /etc/php5/fpm/conf.d/20-xdebug.ini
+grep -q 'xdebug.remote_connect_back = 1' /etc/php5/fpm/conf.d/20-xdebug.ini || echo 'xdebug.remote_connect_back = 1' >> /etc/php5/fpm/conf.d/20-xdebug.ini
+grep -q 'xdebug.remote_port = 9000' /etc/php5/fpm/conf.d/20-xdebug.ini || echo 'xdebug.remote_port = 9000' >> /etc/php5/fpm/conf.d/20-xdebug.ini
+grep -q 'xdebug.max_nesting_level = 200' /etc/php5/fpm/conf.d/20-xdebug.ini || echo 'xdebug.max_nesting_level = 200' >> /etc/php5/fpm/conf.d/20-xdebug.ini
 
 service php5-fpm restart
 
