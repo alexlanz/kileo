@@ -4,11 +4,11 @@
 grep -q 'LC_ALL="en_US.UTF-8"' /etc/environment || echo 'LC_ALL="en_US.UTF-8"' >> /etc/environment
 
 # Hostname, Hosts
-cp /vagrant/vagrant/files/hostname /etc/hostname
-cp /vagrant/vagrant/files/hosts /etc/hosts
+cp /var/www/kileo.dev/vagrant/files/hostname /etc/hostname
+cp /var/www/kileo.dev/vagrant/files/hosts /etc/hosts
 
 # Timezone
-cp /vagrant/vagrant/files/timezone /etc/timezone
+cp /var/www/kileo.dev/vagrant/files/timezone /etc/timezone
 dpkg-reconfigure --frontend noninteractive tzdata
 
 # Updates
@@ -59,7 +59,7 @@ apt-get update
 apt-get install -y nginx
 rm -f /etc/nginx/sites-enabled/default
 rm -f /etc/nginx/sites-available/default
-cp /vagrant/vagrant/files/kileo.dev.conf /etc/nginx/sites-available/
+cp /var/www/kileo.dev/vagrant/files/kileo.dev.conf /etc/nginx/sites-available/
 ln -s /etc/nginx/sites-available/kileo.dev.conf /etc/nginx/sites-enabled/kileo.dev.conf
 service nginx restart
 
