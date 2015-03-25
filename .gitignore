@@ -3,4 +3,5 @@
 .idea
 .vagrant
 .env
-.phpproj
+composer.lock
+*.phpproj
