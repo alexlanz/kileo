@@ -39,4 +39,14 @@ class User extends Model implements AuthenticatableContract {
         $this->attributes['password'] = bcrypt($value);
     }
 
+    /**
+     * Get classes of this user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function classes()
+    {
+        return $this->hasMany('Kileo\SchoolClass');
+    }
+
 }
