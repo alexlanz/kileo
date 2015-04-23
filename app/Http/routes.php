@@ -18,11 +18,11 @@ Route::get('/logout', array('as' => 'logout', 'uses' => 'AuthController@getLogou
 |--------------------------------------------------------------------------
 */
 
-Route::get('/teacher', array('as' => 'teacher.index', 'uses' => 'TeacherController@index'));
-Route::get('/teacher/classes/create', array('as' => 'teacher.classes.create', 'uses' => 'TeacherController@createClass'));
-Route::get('/teacher/classes/{id}/edit', array('as' => 'teacher.classes.edit', 'uses' => 'TeacherController@editClass'));
-Route::post('/teacher/classes', array('as' => 'teacher.classes.store', 'uses' => 'TeacherController@storeClass'));
-Route::get('/teacher/classes/{id}/remove', array('as' => 'teacher.classes.remove', 'uses' => 'TeacherController@removeClass'));
+Route::get('/teacher', array('as' => 'teacher.index', 'uses' => 'Teacher\TeacherController@index'));
+Route::get('/teacher/classes/create', array('as' => 'teacher.classes.create', 'uses' => 'Teacher\SchoolClassController@create'));
+Route::get('/teacher/classes/{id}/edit', array('as' => 'teacher.classes.edit', 'uses' => 'Teacher\SchoolClassController@edit'));
+Route::post('/teacher/classes', array('as' => 'teacher.classes.store', 'uses' => 'Teacher\SchoolClassController@store'));
+Route::get('/teacher/classes/{id}/remove', array('as' => 'teacher.classes.remove', 'uses' => 'Teacher\SchoolClassController@remove'));
 
 
 /*
@@ -31,4 +31,4 @@ Route::get('/teacher/classes/{id}/remove', array('as' => 'teacher.classes.remove
 |--------------------------------------------------------------------------
 */
 
-Route::get('/pupil', array('as' => 'pupil.index', 'uses' => 'PupilController@index'));
+Route::get('/pupil', array('as' => 'pupil.index', 'uses' => 'Pupil\PupilController@index'));

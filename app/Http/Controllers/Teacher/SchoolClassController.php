@@ -1,11 +1,12 @@
-<?php namespace Kileo\Http\Controllers;
+<?php namespace Kileo\Http\Controllers\Teacher;
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Kileo\Http\Controllers\Controller;
 use Kileo\SchoolClass;
 
-class TeacherController extends Controller {
+class SchoolClassController extends Controller {
 
     /**
      * The Guard implementation.
@@ -29,28 +30,27 @@ class TeacherController extends Controller {
 
 
     /**
-     * Show the application login form.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $classes = Auth::user()->classes;
-
-        return view('teacher.index', compact('classes'));
-    }
-
-
-    /**
      * Show create class view
      *
      * @return \Illuminate\View\View
      */
-    public function createClass()
+    public function create()
     {
-        return view('teacher.createclass');
+        return view('teacher.classes.create');
     }
 
+    /**
+     * Show the edit view for a school class
+     *
+     * @param $id
+     * @return \Illuminate\View\View
+     */
+    public function edit($id)
+    {
+        $schoolClass = SchoolClass::find($id);
+
+        return view('teacher.classes.edit', compact('schoolClass'));
+    }
 
     /**
      * Create or Update a school class
@@ -58,7 +58,7 @@ class TeacherController extends Controller {
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function storeClass(Request $request)
+    public function store(Request $request)
     {
         $this->validate($request, [
             'name' => 'required | max:255'
@@ -72,23 +72,8 @@ class TeacherController extends Controller {
 
         $schoolClass->save();
 
-        return redirect('teacher');
+        return redirect()->route('teacher.index');
     }
-
-
-    /**
-     * Show the edit view for a school class
-     *
-     * @param $id
-     * @return \Illuminate\View\View
-     */
-    public function editClass($id)
-    {
-        $schoolClass = SchoolClass::find($id);
-
-        return view('teacher.editclass', compact('schoolClass'));
-    }
-
 
     /**
      * Remove class
@@ -96,14 +81,14 @@ class TeacherController extends Controller {
      * @param $id
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function removeClass($id)
+    public function remove($id)
     {
         $user = Auth::user();
         $schoolClass = SchoolClass::where(array('user_id' => $user->id, 'id' => $id))->first();
 
         $schoolClass->delete();
 
-        return redirect('teacher');
+        return redirect()->route('teacher.index');
     }
 
 }

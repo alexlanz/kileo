@@ -1,8 +1,10 @@
-<?php namespace Kileo\Http\Controllers;
+<?php namespace Kileo\Http\Controllers\Teacher;
 
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Support\Facades\Auth;
+use Kileo\Http\Controllers\Controller;
 
-class PupilController extends Controller {
+class TeacherController extends Controller {
 
     /**
      * The Guard implementation.
@@ -21,7 +23,7 @@ class PupilController extends Controller {
         $this->auth = $auth;
 
         $this->middleware('auth');
-        $this->middleware('pupil');
+        $this->middleware('teacher');
     }
 
 
@@ -32,7 +34,9 @@ class PupilController extends Controller {
      */
     public function index()
     {
-        return view('pupil.index');
+        $classes = Auth::user()->classes;
+
+        return view('teacher.index', compact('classes'));
     }
 
 }
