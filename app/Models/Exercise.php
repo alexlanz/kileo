@@ -1,4 +1,4 @@
-<?php namespace Kileo;
+<?php namespace Kileo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -31,6 +31,6 @@ class Exercise extends Model {
     */
     public function schoolClass()
     {
-        return $this->belongsTo('Kileo\SchoolClass');
+        return $this->belongsTo('Kileo\Models\SchoolClass');
     }
 }

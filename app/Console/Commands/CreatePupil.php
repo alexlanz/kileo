@@ -1,6 +1,6 @@
 <?php namespace Kileo\Console\Commands;
 
-use Kileo\User;
+use Kileo\Models\User;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 

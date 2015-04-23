@@ -1,4 +1,4 @@
-<?php namespace Kileo;
+<?php namespace Kileo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,14 +10,14 @@ class SchoolClass extends Model {
 	 *
 	 * @var string
 	 */
-	protected $table = 'classes';
+	protected $table = 'school_classes';
 
 	/**
 	 * The attributes that are mass assignable.
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['user_id','name'];
+	protected $fillable = ['user_id', 'name'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -32,10 +32,19 @@ class SchoolClass extends Model {
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function teacher()
     {
-        return $this->belongsTo('Kileo\User');
+        return $this->belongsTo('Kileo\Models\User', 'user_id');
     }
 
+    /**
+     * Get pupils of this school class
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pupils()
+    {
+        return $this->hasMany('Kileo\Models\User', 'school_class_id');
+    }
 
 }

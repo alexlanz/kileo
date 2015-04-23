@@ -15,14 +15,14 @@ class CreateExercisesTable extends Migration {
 		Schema::create('exercises', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->unsignedInteger('class_id');
+            $table->unsignedInteger('school_class_id');
             $table->string('name');
             $table->text('description')->nullable();
             $table->boolean('active');
             $table->enum('type', ['math']);
 			$table->timestamps();
             
-            $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
+            $table->foreign('school_class_id')->references('id')->on('school_classes')->onDelete('cascade');
 		});
 	}
 

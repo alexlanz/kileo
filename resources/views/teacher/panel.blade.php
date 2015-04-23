@@ -8,7 +8,7 @@
                 <div class="sidebar-module">
                     <h4>Menu</h4>
                     <ol class="list-unstyled">
-                        <li><a href="{{ url('/teacher') }}">Classes</a></li>
+                        <li><a href="{{ route('teacher.index') }}">Classes</a></li>
                     </ol>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-<?php namespace Kileo;
+<?php namespace Kileo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -32,7 +32,7 @@ class Result extends Model {
     */
     public function exercise()
     {
-        return $this->belongsTo('Kileo\Exercise');
+        return $this->belongsTo('Kileo\Models\Exercise');
     }
 
     /**
@@ -42,7 +42,7 @@ class Result extends Model {
      */
     public function user()
     {
-        return $this->belongsTo('Kileo\User');
+        return $this->belongsTo('Kileo\Models\User');
     }
 
 }

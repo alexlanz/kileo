@@ -1,4 +1,4 @@
-<?php namespace Kileo;
+<?php namespace Kileo\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -40,13 +40,23 @@ class User extends Model implements AuthenticatableContract {
     }
 
     /**
-     * Get classes of this user
+     * Get classes of this teacher
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function classes()
+    public function schoolClasses()
     {
-        return $this->hasMany('Kileo\SchoolClass');
+        return $this->hasMany('Kileo\Models\SchoolClass');
+    }
+
+    /**
+     * Get class of this pupil
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function schoolClass()
+    {
+        return $this->belongsTo('Kileo\Models\SchoolClass');
     }
 
 }

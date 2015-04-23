@@ -34,9 +34,9 @@ class TeacherController extends Controller {
      */
     public function index()
     {
-        $classes = Auth::user()->classes;
+        $schoolClasses = Auth::user()->schoolClasses;
 
-        return view('teacher.index', compact('classes'));
+        return view('teacher.index', compact('schoolClasses'));
     }
 
 }

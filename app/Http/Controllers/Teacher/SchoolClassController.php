@@ -4,7 +4,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Kileo\Http\Controllers\Controller;
-use Kileo\SchoolClass;
+use Kileo\Models\SchoolClass;
 
 class SchoolClassController extends Controller {
 
@@ -28,6 +28,18 @@ class SchoolClassController extends Controller {
         $this->middleware('teacher');
     }
 
+    /**
+     * Show the school class
+     *
+     * @param $id
+     * @return \Illuminate\View\View
+     */
+    public function index($id)
+    {
+        $schoolClass = SchoolClass::find($id);
+
+        return view('teacher.classes.index', compact('schoolClass'));
+    }
 
     /**
      * Show create class view
@@ -61,7 +73,7 @@ class SchoolClassController extends Controller {
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required | max:255'
+            'name' => 'required|max:255'
         ]);
 
         $data = $request->only('id','name');
@@ -84,7 +96,7 @@ class SchoolClassController extends Controller {
     public function remove($id)
     {
         $user = Auth::user();
-        $schoolClass = SchoolClass::where(array('user_id' => $user->id, 'id' => $id))->first();
+        $schoolClass = SchoolClass::where(array('id' => $id, 'user_id' => $user->id))->first();
 
         $schoolClass->delete();
 

@@ -1,8 +1,8 @@
-@extends('teacher.teacherpanel')
+@extends('teacher.panel')
 
 @section('panel')
 
-    <form class="form-horizontal" role="form" method="POST" action="{{ url('/teacher/classes') }}">
+    <form class="form-horizontal" role="form" method="POST" action="{{ route('teacher.classes.store') }}">
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
