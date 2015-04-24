@@ -18,9 +18,16 @@ Route::get('/logout', array('as' => 'logout', 'uses' => 'AuthController@getLogou
 |--------------------------------------------------------------------------
 */
 
-Route::get('/teacher', array('as' => 'teacher.index', 'uses' => 'Teacher\TeacherController@index'));
+Route::group(['prefix' => 'teacher'], function()
+{
+    Route::get('/', array('as' => 'teacher.index', 'uses' => 'Teacher\TeacherController@index'));
 
-Route::resource('/teacher/classes', 'Teacher\SchoolClassController');
+    Route::resource('classes', 'Teacher\SchoolClassController', ['except' => ['index']]);
+    Route::resource('classes.pupils', 'Teacher\PupilsController', ['except' => ['index']]);
+    Route::get('classes/{classes}/pupils/{pupils}/password', array('as' => 'teacher.classes.pupils.password.show', 'uses' => 'Teacher\PupilsController@showPassword'));
+    Route::put('classes/{classes}/pupils/{pupils}/password', array('as' => 'teacher.classes.pupils.password.update', 'uses' => 'Teacher\PupilsController@changePassword'));
+});
+
 
 /*Route::post('/teacher/classes', array('as' => 'teacher.classes.store', 'uses' => 'Teacher\SchoolClassController@store'));
 Route::get('/teacher/classes/create', array('as' => 'teacher.classes.create', 'uses' => 'Teacher\SchoolClassController@create'));
@@ -40,4 +47,7 @@ Route::get('/teacher/classes/{classId}/pupils/{pupilId}/remove', array('as' => '
 |--------------------------------------------------------------------------
 */
 
-Route::get('/pupil', array('as' => 'pupil.index', 'uses' => 'Pupil\PupilController@index'));
+Route::group(['prefix' => 'pupil'], function()
+{
+    Route::get('/', array('as' => 'pupil.index', 'uses' => 'Pupil\PupilController@index'));
+});

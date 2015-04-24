@@ -72,9 +72,9 @@ class SchoolClassController extends Controller {
      */
     public function show($id)
     {
-        $schoolClass = SchoolClass::find($id);
+        $schoolClass = SchoolClass::with('pupils')->find($id);
 
-        return view('teacher.classes.index', compact('schoolClass'));
+        return view('teacher.classes.show', compact('schoolClass'));
     }
 
     /**
