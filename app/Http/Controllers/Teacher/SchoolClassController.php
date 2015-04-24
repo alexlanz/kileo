@@ -1,9 +1,8 @@
 <?php namespace Kileo\Http\Controllers\Teacher;
 
 use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Kileo\Http\Controllers\Controller;
+use Kileo\Http\Requests\SchoolClassRequest;
 use Kileo\Models\SchoolClass;
 
 class SchoolClassController extends Controller {
@@ -16,6 +15,13 @@ class SchoolClassController extends Controller {
     protected $auth;
 
     /**
+     * The current user.
+     *
+     * @var Guard
+     */
+    protected $user;
+
+    /**
      * Create a new controller instance.
      *
      * @param Guard $auth
@@ -26,25 +32,14 @@ class SchoolClassController extends Controller {
 
         $this->middleware('auth');
         $this->middleware('teacher');
+
+        $this->user = $this->auth->user();
     }
 
     /**
-     * Show the school class
+     * Show the form for creating a new resource.
      *
-     * @param $id
-     * @return \Illuminate\View\View
-     */
-    public function index($id)
-    {
-        $schoolClass = SchoolClass::find($id);
-
-        return view('teacher.classes.index', compact('schoolClass'));
-    }
-
-    /**
-     * Show create class view
-     *
-     * @return \Illuminate\View\View
+     * @return Response
      */
     public function create()
     {
@@ -52,51 +47,87 @@ class SchoolClassController extends Controller {
     }
 
     /**
-     * Show the edit view for a school class
+     * Store a newly created resource in storage.
      *
-     * @param $id
-     * @return \Illuminate\View\View
+     * @param SchoolClassRequest $request
+     * @return Response
      */
-    public function edit($id)
+    public function store(SchoolClassRequest $request)
     {
-        $schoolClass = SchoolClass::find($id);
-
-        return view('teacher.classes.edit', compact('schoolClass'));
-    }
-
-    /**
-     * Create or Update a school class
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function store(Request $request)
-    {
-        $this->validate($request, [
-            'name' => 'required|max:255'
-        ]);
-
         $data = $request->only('id','name');
-        $user = Auth::user();
 
-        $schoolClass = SchoolClass::firstOrNew(array('id' => $data['id'], 'user_id' => $user->id));
+        $schoolClass = new SchoolClass();
         $schoolClass->name = $data['name'];
-
+        $schoolClass->teacher()->associate($this->user);
         $schoolClass->save();
 
         return redirect()->route('teacher.index');
     }
 
     /**
-     * Remove class
+     * Display the specified resource.
      *
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @param  int  $id
+     * @return Response
      */
-    public function remove($id)
+    public function show($id)
     {
-        $user = Auth::user();
-        $schoolClass = SchoolClass::where(array('id' => $id, 'user_id' => $user->id))->first();
+        $schoolClass = SchoolClass::find($id);
+
+        return view('teacher.classes.index', compact('schoolClass'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function edit($id)
+    {
+        $schoolClass = SchoolClass::findOrFail($id);
+
+        return view('teacher.classes.edit', compact('schoolClass'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param SchoolClassRequest $request
+     * @param  int $id
+     * @return Response
+     */
+    public function update(SchoolClassRequest $request, $id)
+    {
+        $data = $request->only('id','name');
+
+        $schoolClass = SchoolClass::where('id', $id)->where('user_id', $this->user->id)->first();
+
+        if ( ! $schoolClass)
+        {
+            abort(404, 'School class not found.');
+        }
+
+        $schoolClass->name = $data['name'];
+        $schoolClass->save();
+
+        return redirect()->route('teacher.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        $schoolClass = SchoolClass::where('id', $id)->where('user_id', $this->user->id)->first();
+
+        if ( ! $schoolClass)
+        {
+            abort(404, 'School class not found.');
+        }
 
         $schoolClass->delete();
 

@@ -20,7 +20,9 @@ Route::get('/logout', array('as' => 'logout', 'uses' => 'AuthController@getLogou
 
 Route::get('/teacher', array('as' => 'teacher.index', 'uses' => 'Teacher\TeacherController@index'));
 
-Route::post('/teacher/classes', array('as' => 'teacher.classes.store', 'uses' => 'Teacher\SchoolClassController@store'));
+Route::resource('/teacher/classes', 'Teacher\SchoolClassController');
+
+/*Route::post('/teacher/classes', array('as' => 'teacher.classes.store', 'uses' => 'Teacher\SchoolClassController@store'));
 Route::get('/teacher/classes/create', array('as' => 'teacher.classes.create', 'uses' => 'Teacher\SchoolClassController@create'));
 Route::get('/teacher/classes/{id}', array('as' => 'teacher.classes.index', 'uses' => 'Teacher\SchoolClassController@index'));
 Route::get('/teacher/classes/{id}/edit', array('as' => 'teacher.classes.edit', 'uses' => 'Teacher\SchoolClassController@edit'));
@@ -29,7 +31,7 @@ Route::get('/teacher/classes/{id}/remove', array('as' => 'teacher.classes.remove
 Route::post('/teacher/classes/{classId}/pupils', array('as' => 'teacher.classes.pupils.store', 'uses' => 'Teacher\PupilsController@store'));
 Route::get('/teacher/classes/{classId}/pupils', array('as' => 'teacher.classes.pupils.create', 'uses' => 'Teacher\PupilsController@create'));
 Route::get('/teacher/classes/{classId}/pupils/{pupilId}/edit', array('as' => 'teacher.classes.pupils.edit', 'uses' => 'Teacher\PupilsController@edit'));
-Route::get('/teacher/classes/{classId}/pupils/{pupilId}/remove', array('as' => 'teacher.classes.pupils.remove', 'uses' => 'Teacher\PupilsController@remove'));
+Route::get('/teacher/classes/{classId}/pupils/{pupilId}/remove', array('as' => 'teacher.classes.pupils.remove', 'uses' => 'Teacher\PupilsController@remove'));*/
 
 
 /*

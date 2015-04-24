@@ -2,7 +2,8 @@
 
 @section('panel')
 
-    <form class="form-horizontal" role="form" method="POST" action="{{ route('teacher.classes.store') }}">
+    <form class="form-horizontal" role="form" method="POST" action="{{ route('teacher.classes.update', $schoolClass->id) }}">
+        <input name="_method" type="hidden" value="PUT" />
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
@@ -22,8 +23,7 @@
 
         </div>
 
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <input type="hidden" name="id" value="{{ $schoolClass->id }}">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
         <div class="form-group">
             <label for="name" class="col-sm-2 control-label">Name</label>
