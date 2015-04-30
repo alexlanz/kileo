@@ -11,6 +11,11 @@ cp /var/www/kileo.dev/vagrant/files/hosts /etc/hosts
 cp /var/www/kileo.dev/vagrant/files/timezone /etc/timezone
 dpkg-reconfigure --frontend noninteractive tzdata
 
+
+# Bash profile
+grep -q "export PATH=\"\$PATH:./vendor/bin:~/.composer/vendor/bin\"" /home/vagrant/.bashrc || echo "export PATH=\"\$PATH:./vendor/bin:~/.composer/vendor/bin\"" >> /home/vagrant/.bashrc
+
+
 # Updates
 apt-get update
 apt-get upgrade -y
