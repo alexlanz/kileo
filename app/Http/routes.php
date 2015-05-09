@@ -26,6 +26,11 @@ Route::group(['prefix' => 'teacher'], function()
     Route::resource('classes.pupils', 'Teacher\PupilsController', ['except' => ['index']]);
     Route::get('classes/{classes}/pupils/{pupils}/password', array('as' => 'teacher.classes.pupils.password.show', 'uses' => 'Teacher\PupilsController@showPassword'));
     Route::put('classes/{classes}/pupils/{pupils}/password', array('as' => 'teacher.classes.pupils.password.update', 'uses' => 'Teacher\PupilsController@changePassword'));
+    
+    // exercises
+    Route::get('classes/{classes}/exercises', array('as' => 'teacher.classes.exercises.show', 'uses' => 'Teacher\SchoolClassController@showExercises'));
+    Route::get('classes/{classes}/exercises/createExercise/{type}', array('as' => 'teacher.classes.exercises.createExercise', 'uses' => 'Teacher\ExercisesController@createExercise'));
+    Route::resource('classes.exercises', 'Teacher\ExercisesController', ['except' => ['index']]);
 });
 
 

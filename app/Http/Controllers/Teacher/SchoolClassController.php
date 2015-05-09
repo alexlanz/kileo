@@ -76,6 +76,19 @@ class SchoolClassController extends Controller {
 
         return view('teacher.classes.show', compact('schoolClass'));
     }
+    
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function showExercises($id)
+    {
+        $schoolClass = SchoolClass::with('exercises')->find($id);
+
+        return view('teacher.exercises.show', compact('schoolClass'));
+    }
 
     /**
      * Show the form for editing the specified resource.

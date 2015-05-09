@@ -46,5 +46,15 @@ class SchoolClass extends Model {
     {
         return $this->hasMany('Kileo\Models\User', 'school_class_id');
     }
+    
+    /**
+     * Get pupils of this school class
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function exercises()
+    {
+        return $this->hasMany('Kileo\Models\Exercise', 'school_class_id');
+    }
 
 }
