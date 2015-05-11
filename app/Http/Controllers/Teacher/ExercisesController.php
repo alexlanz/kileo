@@ -1,6 +1,7 @@
 <?php namespace Kileo\Http\Controllers\Teacher;
 
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Support\Facades\Config;
 use Kileo\Http\Controllers\Controller;
 use Kileo\Http\Requests\ExerciseRequest;
 use Kileo\Http\Requests\CreateExerciseRequest;
@@ -38,18 +39,20 @@ class ExercisesController extends Controller {
 
         $this->user = $this->auth->user();
     }
-    
-    private function getConcreteExerciseController($type, $class_id)
+
+    /**
+     * Display all resources.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function index($id)
     {
-        switch($type)
-        {
-            case "math":
-                return new MathExerciseController($this->auth);
-            default:
-                abort(404, 'Exercise type does not exist.');
-        }
-        
-        return redirect()->route('teacher.classes.exercises.show', SchoolClass::find($class));;
+        $schoolClass = SchoolClass::with('exercises')->find($id);
+
+        $exerciseTypes = Config::get('exercises.types');
+
+        return view('teacher.exercises.index', compact('schoolClass', 'exerciseTypes'));
     }
     
     /**
@@ -57,7 +60,7 @@ class ExercisesController extends Controller {
      *
      * @return Response
      */
-    public function createExercise($class, $type)
+    public function create($class, $type)
     {        
         $schoolClass = SchoolClass::where('id', $class)->where('user_id', $this->user->id)->first();
 
@@ -68,8 +71,7 @@ class ExercisesController extends Controller {
 
         return view("teacher.exercises.$type.create", compact('schoolClass', 'type'));
     }
-    
-    
+
 
     /**
      * Store a newly created resource in storage.
@@ -77,6 +79,7 @@ class ExercisesController extends Controller {
      * @param ExerciseRequest $request
      * @param $class
      * @return Response
+     * @throws \Exception
      */
     public function store(ExerciseRequest $request, $class)
     {
@@ -151,6 +154,8 @@ class ExercisesController extends Controller {
      * @param $class
      * @param $exercise
      * @return Response
+     * @throws Exception
+     * @throws \Exception
      */
     public function update(ExerciseRequest $request, $class, $exercise)
     {
@@ -207,6 +212,25 @@ class ExercisesController extends Controller {
 
         $exercise->delete();
         
-        return redirect()->route('teacher.classes.exercises.show', $class);
+        return redirect()->route('teacher.classes.exercises.index', $class);
     }
+
+    /**
+     * @param $type
+     * @param $class_id
+     * @return \Illuminate\Http\RedirectResponse|MathExerciseController
+     */
+    private function getConcreteExerciseController($type, $class_id)
+    {
+        switch($type)
+        {
+            case "math":
+                return new MathExerciseController($this->auth);
+            default:
+                abort(404, 'Exercise type does not exist.');
+        }
+
+        return redirect()->route('teacher.classes.exercises.index', SchoolClass::find($class));;
+    }
+
 }

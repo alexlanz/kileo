@@ -41,6 +41,19 @@ class PupilsController extends Controller {
 
 
     /**
+     * Display all resources.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function index($id)
+    {
+        $schoolClass = SchoolClass::with('pupils')->find($id);
+
+        return view('teacher.pupils.index', compact('schoolClass'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return Response
@@ -83,7 +96,7 @@ class PupilsController extends Controller {
         $pupil->schoolClass()->associate($schoolClass);
         $pupil->save();
 
-        return redirect()->route('teacher.classes.show', $class);
+        return redirect()->route('teacher.classes.pupils.index', $class);
     }
 
     /**
@@ -134,7 +147,7 @@ class PupilsController extends Controller {
         $pupilUser->name = $data['name'];
         $pupilUser->save();
 
-        return redirect()->route('teacher.classes.show', $class);
+        return redirect()->route('teacher.classes.pupils.index', $class);
     }
 
     /**
@@ -155,7 +168,7 @@ class PupilsController extends Controller {
 
         $pupilUser->delete();
 
-        return redirect()->route('teacher.classes.show', $class);
+        return redirect()->route('teacher.classes.pupils.index', $class);
     }
 
     /**
@@ -206,7 +219,7 @@ class PupilsController extends Controller {
         $pupilUser->password = $data['password'];
         $pupilUser->save();
 
-        return redirect()->route('teacher.classes.show', $class);
+        return redirect()->route('teacher.classes.pupils.index', $class);
     }
 
 }

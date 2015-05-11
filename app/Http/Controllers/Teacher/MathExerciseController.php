@@ -58,7 +58,7 @@ class MathExerciseController extends Controller {
         $math_exercise->exercise()->associate($exercise);
         $math_exercise->save();
 
-        return redirect()->route('teacher.classes.exercises.show', $class);
+        return redirect()->route('teacher.classes.exercises.index', $class);
     }
     
     public function findConcreteExercise($id)
@@ -91,7 +91,7 @@ class MathExerciseController extends Controller {
         
         $exercise->save();
 
-        return redirect()->route('teacher.classes.exercises.show', $class);
+        return redirect()->route('teacher.classes.exercises.index', $class);
     }    
     
 }

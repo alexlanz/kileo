@@ -20,8 +20,8 @@
                 <tr>
                     <td>{{ $schoolClass->name }}</td>
                     <td>
-                        <a href="{{ route('teacher.classes.show', $schoolClass->id) }}" class="btn btn-default btn-info btn-xs"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Pupils</a>
-                        <a href="{{ route('teacher.classes.exercises.show', $schoolClass->id) }}" class="btn btn-default btn-warning btn-xs"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> Exercises</a>
+                        <a href="{{ route('teacher.classes.pupils.index', $schoolClass->id) }}" class="btn btn-default btn-info btn-xs"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Pupils</a>
+                        <a href="{{ route('teacher.classes.exercises.index', $schoolClass->id) }}" class="btn btn-default btn-warning btn-xs"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> Exercises</a>
                         <a href="{{ route('teacher.classes.edit', $schoolClass->id) }}" class="btn btn-default btn-success btn-xs"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>
 
                         <form class="form-btn-inline" method="POST" action="{{ route('teacher.classes.destroy', $schoolClass->id) }}">
