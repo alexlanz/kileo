@@ -13,8 +13,7 @@
 	},
 	"autoload": {
 		"classmap": [
-            "database",
-            "app/Helpers" 
+            "database"
 		],
 		"psr-4": {
 			"Kileo\\": "app/"
