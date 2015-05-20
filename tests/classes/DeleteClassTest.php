@@ -36,11 +36,11 @@ class DeleteClassTest extends TestCase {
 
 
 	/**
-	 * Update a class
+	 * Delete a class
 	 *
 	 * @return void
 	 */
-	public function testUpdateClass()
+	public function testDeleteClass()
 	{
         $user_id = Auth::user()->id;
 
