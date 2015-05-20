@@ -48,13 +48,14 @@ class MathExerciseController extends Controller {
      */
     public function store(ExerciseRequest $request, $class, $exercise)
     {
-        $data = $request->only('from','to','num_of_calculations');
+        $data = $request->only('from','to','num_of_calculations', 'operation');
 
         $math_exercise = new MathExercise();
         $math_exercise->id = $exercise->id;
         $math_exercise->from = $data['from'];
         $math_exercise->to = $data['to'];
-        $math_exercise->num_of_calculations = $data['num_of_calculations'];
+        $math_exercise->num_of_calculations = $data['num_of_calculations'];        
+        $math_exercise->operation = $data['operation'];
         $math_exercise->exercise()->associate($exercise);
         $math_exercise->save();
 
@@ -76,7 +77,7 @@ class MathExerciseController extends Controller {
      */
     public function update(ExerciseRequest $request, $class, $exercise)
     {
-        $data = $request->only('from','to','num_of_calculations');
+        $data = $request->only('from','to','num_of_calculations', 'operation');
         
         $exercise = MathExercise::find($exercise->id);
 
@@ -88,6 +89,7 @@ class MathExerciseController extends Controller {
         $exercise->from = $data['from'];
         $exercise->to = $data['to'];
         $exercise->num_of_calculations = $data['num_of_calculations'];
+        $exercise->operation = $data['operation'];
         
         $exercise->save();
 

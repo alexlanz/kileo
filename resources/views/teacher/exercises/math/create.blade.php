@@ -23,4 +23,22 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <label for="operation" class="col-sm-2 control-label">Math Operation</label>
+            <div class="col-sm-10">
+                <div class="radio">
+                  <label><input type="radio" name="operation" value="1">Addition</label>
+                </div>
+                <div class="radio">
+                  <label><input type="radio" name="operation" value="2">Subtraction</label>
+                </div>
+                <div class="radio">
+                  <label><input type="radio" name="operation" value="3">Multiplication</label>
+                </div>           
+                <div class="radio">
+                  <label><input type="radio" name="operation" value="4">Division</label>
+                </div>           
+            </div>
+        </div>
+
 @endsection

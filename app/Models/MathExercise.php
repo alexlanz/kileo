@@ -15,7 +15,7 @@ class MathExercise extends Model {
     *
     * @var array
     */
-    protected $fillable = ['from','to', 'num_of_calculations'];
+    protected $fillable = ['from','to', 'num_of_calculations', 'operation'];
 
     /**
     * The attributes excluded from the model's JSON form.

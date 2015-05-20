@@ -19,6 +19,7 @@ class CreateMathExercisesTable extends Migration {
             $table->integer('from');
             $table->integer('to');
             $table->unsignedInteger('num_of_calculations');
+            $table->unsignedinteger('operation');
             
             $table->foreign('id')->references('id')->on('exercises')->onDelete('cascade');
 		});
