@@ -48,7 +48,7 @@ class SchoolClass extends Model {
     }
     
     /**
-     * Get pupils of this school class
+     * Get exercises of this school class
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

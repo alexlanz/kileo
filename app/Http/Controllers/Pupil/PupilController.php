@@ -1,6 +1,7 @@
 <?php namespace Kileo\Http\Controllers\Pupil;
 
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Support\Facades\Auth;
 use Kileo\Http\Controllers\Controller;
 
 class PupilController extends Controller {
@@ -33,7 +34,11 @@ class PupilController extends Controller {
      */
     public function index()
     {
-        return view('pupil.index');
+
+        $schoolClass = Auth::user()->schoolClass;
+        $exercises = $schoolClass->exercises;
+
+        return view('pupil.index', compact('exercises'));
     }
 
 }
