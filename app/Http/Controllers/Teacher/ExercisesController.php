@@ -230,7 +230,7 @@ class ExercisesController extends Controller {
                 abort(404, 'Exercise type does not exist.');
         }
 
-        return redirect()->route('teacher.classes.exercises.index', SchoolClass::find($class));;
+        return redirect()->route('teacher.classes.exercises.index', SchoolClass::find($class_id));
     }
 
 }

@@ -1,11 +1,10 @@
 <?php namespace Kileo\Http\Controllers\Teacher;
 
 use Illuminate\Contracts\Auth\Guard;
+use Kileo\Core\MathTask;
 use Kileo\Http\Controllers\Controller;
 use Kileo\Http\Requests\ExerciseRequest;
 use Kileo\Http\Requests\CreateExerciseRequest;
-use Kileo\Models\SchoolClass;
-use Kileo\Models\Exercise;
 use Kileo\Models\MathExercise;
 
 class MathExerciseController extends Controller {
@@ -94,6 +93,7 @@ class MathExerciseController extends Controller {
         $exercise->save();
 
         return redirect()->route('teacher.classes.exercises.index', $class);
-    }    
-    
+    }
+
+
 }

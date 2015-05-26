@@ -56,4 +56,5 @@ Route::get('/teacher/classes/{classId}/pupils/{pupilId}/remove', array('as' => '
 Route::group(['prefix' => 'pupil'], function()
 {
     Route::get('/', array('as' => 'pupil.index', 'uses' => 'Pupil\PupilController@index'));
+    Route::get('exercise/{id}', array('as' => 'pupil.exercise.show', 'uses' => 'Pupil\ExercisesController@show'));
 });
