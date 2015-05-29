@@ -17,9 +17,8 @@ class CreateResultsTable extends Migration {
 			$table->increments('id');
             $table->unsignedInteger('exercise_id');
             $table->unsignedInteger('user_id');
-            $table->integer('num_of_results'); //delete
             $table->integer('correct_results');
-            //json result
+            $table->json('results');
 			$table->timestamps();
             
             $table->foreign('exercise_id')->references('id')->on('exercises')->onDelete('cascade');

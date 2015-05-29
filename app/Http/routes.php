@@ -57,4 +57,5 @@ Route::group(['prefix' => 'pupil'], function()
 {
     Route::get('/', array('as' => 'pupil.index', 'uses' => 'Pupil\PupilController@index'));
     Route::get('exercise/{id}', array('as' => 'pupil.exercise.show', 'uses' => 'Pupil\ExercisesController@show'));
+    Route::post('exercise/{id}', array('as' => 'pupil.exercise.post', 'uses' => 'Pupil\ExercisesController@post'));
 });

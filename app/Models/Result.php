@@ -16,7 +16,14 @@ class Result extends Model {
     *
     * @var array
     */
-    protected $fillable = ['exercise_id', 'user_id', 'num_of_results', 'correct_results'];
+    protected $fillable = ['exercise_id', 'user_id', 'correct_results', 'results'];
+
+    /**
+     * The attributes with specific casting.
+     *
+     * @var array
+     */
+    protected $casts = ['results' => 'json'];
 
     /**
     * The attributes excluded from the model's JSON form.

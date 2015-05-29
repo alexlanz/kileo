@@ -1,6 +1,7 @@
 <?php namespace Kileo\Http\Controllers\Pupil;
 
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Http\Request;
 use Kileo\Http\Controllers\Controller;
 use Kileo\Models\Exercise;
 use DB;
@@ -53,9 +54,29 @@ class ExercisesController extends Controller {
         }
 
         $controller = $this->getConcreteExerciseController($exercise->type);
-        $response = $controller->getExerciseSheet($exercise->id);
 
         return $controller->getExerciseSheet($exercise->id);
+    }
+
+    /**
+     * Post the results of a specified exercise.
+     *
+     * @param Request $request
+     * @param $id
+     * @return Response
+     */
+    public function post(Request $request, $id)
+    {
+        $exercise = Exercise::where('id', $id)->first();
+
+        if ( ! $exercise)
+        {
+            abort(404, 'Exercise not found.');
+        }
+
+        $controller = $this->getConcreteExerciseController($exercise->type);
+
+        return $controller->postExerciseSheetResults($exercise->id, $request);
     }
 
 
