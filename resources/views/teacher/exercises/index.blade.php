@@ -41,6 +41,8 @@
                             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                             <button type="submit" class="btn btn-default btn-warning btn-xs"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove</button>
                         </form>
+
+                        <a href="{{ route('teacher.classes.exercises.results.index', [$schoolClass->id, $exercise->id]) }}" class="btn btn-default btn-info btn-xs"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Results</a>
                     </td>
                 </tr>
             @endforeach

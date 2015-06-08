@@ -27,11 +27,13 @@ Route::group(['prefix' => 'teacher'], function()
     Route::resource('classes.pupils', 'Teacher\PupilsController', ['except' => ['show']]);
     Route::get('classes/{classes}/pupils/{pupils}/password', array('as' => 'teacher.classes.pupils.password.show', 'uses' => 'Teacher\PupilsController@showPassword'));
     Route::put('classes/{classes}/pupils/{pupils}/password', array('as' => 'teacher.classes.pupils.password.update', 'uses' => 'Teacher\PupilsController@changePassword'));
-    
+  
     // Exercises
     Route::resource('classes.exercises', 'Teacher\ExercisesController', ['except' => ['show', 'create']]);
     Route::get('classes/{classes}/exercises/create/{type}', array('as' => 'teacher.classes.exercises.create', 'uses' => 'Teacher\ExercisesController@create'));
 
+    // Exercises results
+    Route::resource('classes.exercises.results', 'Teacher\ExercisesResultsController');
 });
 
 

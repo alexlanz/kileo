@@ -9,6 +9,7 @@
                     <h4>Menu</h4>
                     <ol class="list-unstyled">
                         <li><a href="{{ route('teacher.index') }}">Classes</a></li>
+                        @yield('menu')
                     </ol>
                 </div>
             </div>
