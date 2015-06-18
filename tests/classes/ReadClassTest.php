@@ -48,7 +48,7 @@ class ReadClassTest extends TestCase {
             ['user_id' => $user_id, 'name' => 'ReadClass']
         );
 
-        $response = $this->call('GET', '/teacher/classes/' . $classId);
+        $response = $this->call('GET', '/teacher/classes/' . $classId . '/edit');
 
         $this->assertResponseOk();
         $this->assertContains('ReadClass', $response->getContent());
